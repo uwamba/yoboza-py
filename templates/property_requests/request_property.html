@@ -1,0 +1,192 @@
+<!-- property_requests/templates/property_requests/request_property.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load filters %}
+
+{% load humanize %}
+
+{% block content %}
+
+
+{% include 'core/partials/_showcase_section.html' %}
+
+
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}">{{ _("Home") }}</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listings' %}">{{ _("Request") }}</a>
+        </li>
+        <!-- <li class="breadcrumb-item active">{{ listing.title }}</li> -->
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Alerts -->
+{% include 'core/partials/_alerts.html' %}
+
+<!-- Listing -->
+<section id="listing" class="py-4">
+  <div class="container">
+
+
+
+    <!-- Description -->
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.user_name.id_for_label }}">User Name</label>
+          {{ form.user_name }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.user_email.id_for_label }}">User Email</label>
+          {{ form.user_email }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.phone.id_for_label }}">Phone</label>
+          {{ form.phone }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.address.id_for_label }}">Address</label>
+          {{ form.address }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.min_budget.id_for_label }}">Min Budget</label>
+          {{ form.min_budget }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.max_budget.id_for_label }}">Max Budget</label>
+          {{ form.max_budget }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.property_type.id_for_label }}">Property Type</label>
+          {{ form.property_type }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.area.id_for_label }}">Area</label>
+          {{ form.area }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.min_bedroom.id_for_label }}">Min Bedroom</label>
+          {{ form.min_bedroom }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.min_bathroom.id_for_label }}">Min Bathroom</label>
+          {{ form.min_bathroom }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-check">
+          <label class="form-check-label" for="{{ form.kitchen_required.id_for_label }}">
+            {{ form.kitchen_required }} Kitchen Required
+          </label>
+        </div>
+
+        <div class="col-md-6 form-check">
+          <label class="form-check-label" for="{{ form.annex_required.id_for_label }}">
+            {{ form.annex_required }} Annex Required
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.roof_type.id_for_label }}">Roof Type</label>
+          {{ form.roof_type }}
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.floor.id_for_label }}">Floor</label>
+          {{ form.floor }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-check">
+          <label class="form-check-label" for="{{ form.is_near_tarmac_road.id_for_label }}">
+            {{ form.is_near_tarmac_road }} Near Tarmac Road
+          </label>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="{{ form.distance_to_tarmac_road.id_for_label }}">Distance to Tarmac Road (km)</label>
+          {{ form.distance_to_tarmac_road }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="{{ form.plot_size.id_for_label }}">Plot Size (sqm)</label>
+          {{ form.plot_size }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.message.id_for_label }}">Message</label>
+        {{ form.message }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+
+<script>
+  function myMap() {
+    const myLatLng = {
+      lat: {
+        {
+          listing.get_coordinates.latitude % 7 Cstringformat % 3 A % 26 % 2334 % 3 Bf % 26 % 2334 % 3 B
+        }
+      },
+      lng: {
+        {
+          listing.get_coordinates.longitude % 7 Cstringformat % 3 A % 26 % 2334 % 3 Bf % 26 % 2334 % 3 B
+        }
+      }
+    };
+    var mapProp = {
+      center: new google.maps.LatLng(myLatLng),
+      zoom: 14
+    };
+    var map = new google.maps.Map(document.getElementById("map"), mapProp);
+    const marker = new google.maps.Marker({
+      position: myLatLng,
+      map,
+      title: "{{ listing.get_coordinates.address }}"
+    });
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR-API-KEY]&callback=myMap"></script>
+
+
+{% endblock %}

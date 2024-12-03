@@ -1,0 +1,54 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Property Request Details</h1>
+
+  <table class="table">
+    <tr>
+      <th>User Name:</th>
+      <td>{{ property_request.user_name }}</td>
+    </tr>
+    <tr>
+      <th>User Email:</th>
+      <td>{{ property_request.user_email }}</td>
+    </tr>
+    <tr>
+      <th>Phone:</th>
+      <td>{{ property_request.phone }}</td>
+    </tr>
+    <tr>
+      <th>Property Type:</th>
+      <td>{{ property_request.property_type }}</td>
+    </tr>
+    <tr>
+      <th>Min Budget:</th>
+      <td>{{ property_request.min_budget }}</td>
+    </tr>
+    <tr>
+      <th>Max Budget:</th>
+      <td>{{ property_request.max_budget }}</td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td>{{ property_request.address }}</td>
+    </tr>
+    <tr>
+      <th>Is Near Tarmac Road:</th>
+      <td>{{ property_request.is_near_tarmac_road }}</td>
+    </tr>
+    <tr>
+      <th>Distance to Tarmac Road:</th>
+      <td>{{ property_request.distance_to_tarmac_road }}</td>
+    </tr>
+    <tr>
+      <th>Plot Size:</th>
+      <td>{{ property_request.plot_size }}</td>
+    </tr>
+    <tr>
+      <th>Annex Required:</th>
+      <td>{{ property_request.annex_required }}</td>
+    </tr>
+  </table>
+
+  <a href="{% url 'admin:property_requests_propertyrequest_changelist' %}">Back to Property Requests</a>
+{% endblock %}
